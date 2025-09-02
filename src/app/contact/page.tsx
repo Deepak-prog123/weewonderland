@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 
 const page = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +44,12 @@ ${formData.message}
     window.location.href = mailtoLink;
   };
   return (
-    <div className="relative min-h-screen">
+    <motion.div
+      className="relative min-h-screen"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -56,7 +62,12 @@ ${formData.message}
         />
       </div>
 
-      <div className="absolute top-18 left-1/2 transform -translate-x-1/2 z-20">
+      <motion.div
+        className="absolute top-18 left-1/2 transform -translate-x-1/2 z-20"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
         <div className="w-full flex justify-center">
           <Image
             src="/images/contact-us.png"
@@ -68,11 +79,17 @@ ${formData.message}
             priority
           />
         </div>
-      </div>
+      </motion.div>
 
       <div className="relative z-10 flex items-center justify-center  px-4 pb-18 pt-80">
         <div className="w-full max-w-6xl flex flex-col lg:flex-row gap-8 items-center">
-          <div className="bg-[#8BC34A] bg-opacity-90 backdrop-blur-sm rounded-3xl p-8 w-full lg:w-1/2 shadow-xl">
+          <motion.div
+            className="bg-[#8BC34A] bg-opacity-90 backdrop-blur-sm rounded-3xl p-8 w-full lg:w-1/2 shadow-xl"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <form className="space-y-6" onSubmit={handleSubmit}>
               {/* Name and Email Row */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -137,41 +154,68 @@ ${formData.message}
                 </button>
               </div>
             </form>
-          </div>
+          </motion.div>
 
           {/* Right Side - Contact Information */}
-          <div className="w-full lg:w-1/2 space-y-6">
+          <motion.div
+            className="w-full lg:w-1/2 space-y-6"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
             {/* Email Card */}
-            <div className="bg-[#4CAF50] rounded-b-[150px] rounded-t-[350px] p-6 text-white shadow-xl text-center border-2 border-white">
+            <motion.div
+              className="bg-[#4CAF50] rounded-b-[150px] rounded-t-[350px] p-6 text-white shadow-xl text-center border-2 border-white"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            >
               <div className="flex items-center justify-center gap-4 mb-2">
                 <Mail className="w-8 h-8" />
                 <h3 className="text-2xl font-bold">Our Email</h3>
               </div>
               <p className="text-lg font-medium">WONDERLANDWEE@GMAIL.COM</p>
-            </div>
+            </motion.div>
 
             {/* Location Card */}
-            <div className="bg-[#4CAF50] rounded-b-[150px] rounded-t-[350px] p-6 text-white shadow-xl text-center border-2 border-white">
+            <motion.div
+              className="bg-[#4CAF50] rounded-b-[150px] rounded-t-[350px] p-6 text-white shadow-xl text-center border-2 border-white"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            >
               <div className="flex items-center justify-center gap-4 mb-2">
                 <MapPin className="w-8 h-8" />
                 <h3 className="text-2xl font-bold">Location</h3>
               </div>
               <p className="text-lg font-medium">SECTOR-12A RD, BESIDE</p>
               <p className="text-lg font-medium">BIKANERWALA, DWARKA,</p>
-            </div>
+            </motion.div>
 
             {/* Phone Card */}
-            <div className="bg-[#4CAF50] rounded-b-[150px] rounded-t-[350px] p-6 text-white shadow-xl text-center border-2 border-white">
+            <motion.div
+              className="bg-[#4CAF50] rounded-b-[150px] rounded-t-[350px] p-6 text-white shadow-xl text-center border-2 border-white"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            >
               <div className="flex items-center justify-center gap-4 mb-2">
                 <Phone className="w-8 h-8" />
                 <h3 className="text-2xl font-bold">Phone</h3>
               </div>
               <p className="text-lg font-medium">099584 18383</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

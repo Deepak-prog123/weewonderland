@@ -3,6 +3,32 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
+
+const fadeInVariants = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+};
 
 const servicesData = [
   {
@@ -63,30 +89,44 @@ const servicesData = [
 
 const page = () => {
   return (
-    <div
+    <motion.div
       className="bg-[#FEFFEB] min-h-screen py-16"
       style={{ backgroundImage: "url('/images/frame5.png')" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
     >
-      <div className="flex flex-col gap-8 items-center max-w-7xl mx-auto">
+      <motion.div
+        className="flex flex-col gap-8 items-center max-w-7xl mx-auto"
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainer}
+      >
         {servicesData.map(
           (
             { bgColor, buttonText, description, image, position, title },
             idx
           ) => (
-            <div
+            <motion.div
               key={idx}
               className={`w-full flex flex-col md:flex-row items-center justify-center gap-4 px-2 ${
                 position === "left" ? "md:flex-row-reverse" : ""
               }`}
+              variants={fadeInVariants}
+              whileInView="visible"
+              initial="hidden"
+              viewport={{ once: true, amount: 0.3 }}
             >
               {/* Card Section */}
-              <div
+              <motion.div
                 className={cn(
                   `flex-1 w-full max-w-xl ${bgColor} p-4 sm:p-6 md:p-8 shadow-xl flex flex-col justify-center min-h-[220px] sm:min-h-[280px] md:min-h-[340px]`,
                   position === "left"
                     ? "rounded-tr-[100px] md:rounded-tr-[150px] rounded-tl-[50px] rounded-b-[50px]"
                     : "rounded-tl-[100px] md:rounded-tl-[150px] rounded-tr-[50px] rounded-b-[50px]"
                 )}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-4 drop-shadow-lg text-center">
                   {title}
@@ -97,9 +137,13 @@ const page = () => {
                 <button className="bg-white text-[#F8BA32] font-semibold px-4 sm:px-6 py-2 rounded-full border border-[#F8BA32] shadow hover:bg-[#fff7e0] transition-colors w-fit text-base sm:text-lg">
                   {buttonText}
                 </button>
-              </div>
+              </motion.div>
               {/* Image Section */}
-              <div className="flex-1 flex items-center justify-center">
+              <motion.div
+                className="flex-1 flex items-center justify-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <div className="rounded-[40px] sm:rounded-[60px] bg-[#FEFFEB] p-1 sm:p-2 shadow-xl flex items-center justify-center aspect-square w-full max-w-[220px] sm:max-w-[300px] md:max-w-[340px] lg:max-w-[400px]">
                   <Image
                     src={image}
@@ -110,12 +154,12 @@ const page = () => {
                     draggable="false"
                   />
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           )
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
