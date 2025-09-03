@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Wee Wonderland",
-  description: "",
+  description: "Wee Wonderland",
 };
 
 export default function RootLayout({
