@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 
-const page = () => {
+const Page = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -219,4 +219,4 @@ ${formData.message}
   );
 };
 
-export default page;
+export default Page;
